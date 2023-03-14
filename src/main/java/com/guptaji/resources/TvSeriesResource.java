@@ -1,6 +1,7 @@
 package com.guptaji.resources;
 
 import com.guptaji.proxyInterface.TvSeriesProxy;
+import org.eclipse.microprofile.faulttolerance.Fallback;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import javax.ws.rs.GET;
@@ -27,7 +28,14 @@ public class TvSeriesResource {
         return Response.ok(tvSeriesProxy.getTvSeriesById(id)).build();
     }
 
+    // fallback method of below API but when i created this method in a separate class it did n't work?
+    // to test this fallback is executing or not just change the API path from 'search/people' to 'search/people11'
+    public Response getTvSeriesDataByPersonNameByFallback(String personName){
+        return Response.ok("Site is under Maintenance").build();
+    }
+
     @GET
+    @Fallback(fallbackMethod = "getTvSeriesDataByPersonNameByFallback")
     @Path("/person/{personName}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getTvSeriesDataByPersonName(@PathParam("personName") String personName){
