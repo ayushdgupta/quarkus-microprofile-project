@@ -10,8 +10,9 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
-@Path("/")
+
 @RegisterRestClient(baseUri = "https://api.tvmaze.com")
+@Path("/")
 public interface TvSeriesProxy {
 
     // URL we wanna hit is https://api.tvmaze.com/shows/169 base url + /shows + path param
